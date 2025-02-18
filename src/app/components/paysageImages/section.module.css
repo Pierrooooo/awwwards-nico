@@ -1,0 +1,23 @@
+.paysage_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.paysage_container>div {
+    width: 100%;
+    height: 100%;
+}
+
+.paysage_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);/*  start */
+    /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */ /*  end */
+}

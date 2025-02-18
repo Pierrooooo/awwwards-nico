@@ -1,0 +1,147 @@
+:root {
+  --max-width: 1660px;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  --primary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #16abff33 0deg,
+    #0885ff33 55deg,
+    #54d6ff33 120deg,
+    #0071ff33 160deg,
+    transparent 360deg
+  );
+  --secondary-glow: radial-gradient(
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+
+  --bezier-1: cubic-bezier(.5,.5,.68,1);
+  --bezier-2: cubic-bezier(.42,.43,1,.56);
+  --bezier-3: cubic-bezier(.42,.43,1,.56);
+
+  --black: rgb(14, 3, 1);
+  --white: hsl(40, 46%, 98%);
+
+  --swiper-navigation-top-offset: 90%;
+
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-l: 1400px;
+  --breakpoint-xl: 1700px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.overlay {
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .4);
+  pointer-events: none;
+}
+
+section + section,
+main + footer {
+  margin-top: 80px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.anim_img_bg {
+  scale: 1.1;
+  transform: translateY(-70px);
+  transform-origin: top;
+}
+
+strong:not(.bold) {
+  font-weight: normal;
+}
+
+.underline {
+  width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .underline {
+    text-decoration: underline;
+  }
+}
+@media (min-width: 768px) {
+  .underline {
+    position: relative;
+  }
+
+  .underline:before,
+  .underline:after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--black);
+      transition: .3s;
+  }
+
+  .underline--light:before,
+  .underline--light:after {
+    background-color: var(--white);
+  }
+
+  .underline:before {
+      transform-origin: right;
+  }
+  .underline:after {
+      transform-origin: left;
+      transform: scaleX(0);
+      transition-delay: .15s;
+  }
+
+  .underline:hover:before {
+      transform: scaleX(0);
+  }
+  .underline:hover:after {
+      transform: scaleX(1);
+  }
+
+
+  section + section,
+  main + footer {
+    margin-top: 140px;
+  }
+}
+
+@media (min-width: 1200px) {
+  section + section,
+  main + footer {
+    margin-top: 240px;
+  }
+}

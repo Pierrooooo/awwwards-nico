@@ -1,0 +1,118 @@
+
+
+
+/* Navigation */
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    top: calc(50% - 20px);
+    width: 48px;
+    height: 48px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.swiper-button-prev {
+    left: 40px;
+    right: auto;
+}
+
+.swiper-button-next {
+    left: auto;
+    right: 40px;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-family: swiper-icons;
+    font-size: 40px;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    fill: var(--white);
+}
+
+.swiper-button-prev:after {
+    content: '';
+    background-image: url(/assets/icons/arrow-left-thin.svg);
+}
+
+.swiper-button-next:after {
+    content: '';
+    background-image: url(/assets/icons/arrow-right-thin.svg);
+}
+
+
+/* Pagination */
+
+.swiper-pagination {    
+    position: absolute;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    mix-blend-mode: difference;
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 12px;
+    background: transparent;
+    border: solid 1.5px var(--black);
+    opacity: .2;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+    background-color: rgba(0, 0, 0, .1);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet + .swiper-pagination-bullet {
+    margin-left: 8px;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 24px;
+    background: var(--black);
+
+}
+
+
+/* ScrollBar */
+
+.swiper-scrollbar {
+    z-index: 50;
+    position: absolute;
+    bottom: 12px;
+    left: 15%;
+    height: 3px;
+    width: 70%;
+}
+  
+.swiper-scrollbar-drag {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+}
