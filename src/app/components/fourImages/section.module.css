@@ -1,0 +1,42 @@
+.section_container {
+    position: relative;
+    aspect-ratio: 2;
+    width: 100%;
+}
+
+.images_container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.images_container:nth-child(2) {
+    pointer-events: none;
+}
+.images_container.move_left {
+    transform: translate3d(-50%, 0, 0);
+}
+.images_container.move_right {
+    transform: translate3d(50%, 0, 0);
+}
+
+.image {
+    flex: 1 1 50%;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}

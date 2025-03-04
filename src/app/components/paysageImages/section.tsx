@@ -13,31 +13,7 @@ export default function PaysageImages({ images }: PaysageImagesProps): JSX.Eleme
 
   useEffect(() => {
     if (!containerRef.current) return;
-
-    const imageElements = containerRef.current.querySelectorAll(`.${styles.paysage_image}`);
-
-    // gsap.timeline({
-    //     scrollTrigger: {
-    //       trigger: "images_container",
-    //       start: "top top",
-    //       end: "+=300%",
-    //       scrub: 1,
-    //       pin: true
-    //     }
-    //   })
-    //   .fromTo(
-    //     imageElements,
-    //     {
-    //       clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
-    //     },
-    //     {
-    //       clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-    //       ease: 'power2.inOut',
-    //       stagger: 1
-    //     }
-    //   );
-
-    scrollImageTransition(".section_paysageimages", `.${styles.paysage_image}`);
+    scrollImageTransition(".images_container", `.${styles.paysage_image}`);
   }, [images]);
 
   return (

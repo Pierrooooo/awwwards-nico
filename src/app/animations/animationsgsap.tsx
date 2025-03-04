@@ -111,30 +111,33 @@ export const scrollReveal = (
 
 export const scrollImageTransition = (containerSelector: string, imageSelector: string) => {
   if (typeof window !== "undefined") {
-    // const { gsap } = require("gsap");
-    // const { ScrollTrigger } = require("gsap/ScrollTrigger");
+    const { gsap } = require("gsap");
+    const { ScrollTrigger } = require("gsap/ScrollTrigger");
     
-    // gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-    // const sections = gsap.utils.toArray<HTMLElement>(imageSelector);
+    const sections: HTMLElement[] = gsap.utils.toArray(imageSelector);
     
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: containerSelector,
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: true,
-    //     pin: true,
-    //   }
-    // });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerSelector,
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+        markers: true,
+        // pin: true,
+        toggleActions: "play reverse",
+      }
+    });
 
-    // sections.forEach((section) => {
-    //   tl.fromTo(
-    //     section,
-    //     { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
-    //     { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.5, ease: "power2.out" }
-    //   );
-    // });
+    sections.forEach((section) => {
+      tl.fromTo(
+        section,
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
+        { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"}
+        // { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.5, ease: "power2.out" }
+      );
+    });
   }
 };
 
