@@ -1,6 +1,6 @@
-import { Bricolage_Grotesque, Rubik } from 'next/font/google';
+import { Lexend_Deca, Rubik } from 'next/font/google';
 
-export const titleFont = Bricolage_Grotesque({
+export const titleFont = Lexend_Deca({
   subsets: ['latin'],
   display: 'swap'
 });
