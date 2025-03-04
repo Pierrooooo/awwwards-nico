@@ -76,7 +76,8 @@ export default function ThreeScene() {
       contentRef,
       planesConfig,
       setCameraY,
-      setCameraZ
+      setCameraZ,
+      setIsScrolling
     );
     
     return cleanup;
@@ -84,7 +85,7 @@ export default function ThreeScene() {
 
   return (
     <div ref={contentRef} style={{ width: '100vw', height: '100vh' }}>
-      <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <CameraController cameraY={cameraY} cameraZ={cameraZ} />
         {planesConfig.map((config, i) => (
           <Plane key={i} {...config} isScrolling={isScrolling} />

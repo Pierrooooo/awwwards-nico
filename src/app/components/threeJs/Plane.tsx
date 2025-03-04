@@ -1,7 +1,7 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from 'three'
 import { planeVertexShader } from "./shaders/planeVertexShader";
@@ -25,6 +25,10 @@ export const Plane = ({ image, position, width, height, isScrolling }: PlaneProp
   const meshRef = useRef<THREE.Mesh>(null);
   const texture = useLoader(TextureLoader, image.src);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    console.log("isScrolling state changed:", isScrolling);
+  }, [isScrolling]);
 
   const uniforms = useRef({
     uOffsetZ: { value: 0 },
