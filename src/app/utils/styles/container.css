@@ -1,6 +1,11 @@
+.full_container {
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     .container,
-    .small_container {
+    .small_container,
+    .full_container {
         padding-left: 20px;
         padding-right: 20px;
     }

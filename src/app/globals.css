@@ -1,8 +1,5 @@
 :root {
   --max-width: 1660px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -72,7 +69,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .anim_img_bg {
@@ -131,7 +128,6 @@ strong:not(.bold) {
   .underline:hover:after {
       transform: scaleX(1);
   }
-
 
   section + section,
   main + footer {
