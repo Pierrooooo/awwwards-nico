@@ -1,6 +1,5 @@
 "use client";
 
-import * as THREE from "three";
 import { useRef, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { scrollThreeAnimation } from "@/app/animations/threejsAnimations";
@@ -15,6 +14,10 @@ const Images = [
   { src: "/assets/images/CULTUREL/PALEON/NC-Edited_03Galerie-05.jpg", width: 1365, height: 2048 },
   { src: "/assets/images/CULTUREL/PALEON/NC-Edited_02Galerie-31.jpg", width: 2048, height: 1365 },
   { src: "/assets/images/CULTUREL/PALEON/NC-Edited_02Galerie-13.jpg", width: 2048, height: 1365 },
+  { src: "/assets/images/CULTUREL/PALEON/NC-Edited_02Galerie-07.jpg", width: 2048, height: 1365 },
+  { src: "/assets/images/CULTUREL/PALEON/NC-Edited_02Galerie-13.jpg", width: 2048, height: 1365 },
+  { src: "/assets/images/CULTUREL/PALEON/NC-Edited_03Galerie-05.jpg", width: 1365, height: 2048 },
+  { src: "/assets/images/CULTUREL/PALEON/NC-Edited_02Galerie-31.jpg", width: 2048, height: 1365 },
 ];
 
 export default function ThreeScene() {
@@ -31,7 +34,7 @@ export default function ThreeScene() {
 
   useEffect(() => {
     const calculateLayout = () => {
-      const scaleFactor = 0.007;
+      const scaleFactor = 0.01;
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
       const spacing = 3;
@@ -72,6 +75,7 @@ export default function ThreeScene() {
 
   // Setup animation
   useEffect(() => {
+    // enterPlanesAnimation(planesConfig);
     const cleanup = scrollThreeAnimation(
       contentRef,
       planesConfig,
@@ -88,7 +92,7 @@ export default function ThreeScene() {
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <CameraController cameraY={cameraY} cameraZ={cameraZ} />
         {planesConfig.map((config, i) => (
-          <Plane key={i} {...config} isScrolling={isScrolling} />
+          <Plane key={i} {...config} isScrolling={isScrolling} scrollSpeed={0} />
         ))}
       </Canvas>
     </div>

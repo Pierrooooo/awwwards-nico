@@ -1,9 +1,9 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { TextureLoader } from 'three'
+import { TextureLoader } from "three";
 import { planeVertexShader } from "./shaders/planeVertexShader";
 import { planeFragmentShader } from "./shaders/planeFragmentShader";
 import { planeVertexScrollShader } from "./shaders/planeVertexScrollShader";
@@ -19,58 +19,45 @@ interface PlaneProps {
   width: number;
   height: number;
   isScrolling: boolean;
+  scrollSpeed: number;
 }
 
-export const Plane = ({ image, position, width, height, isScrolling }: PlaneProps) => {
+export const Plane = ({ image, position, width, height, isScrolling, scrollSpeed }: PlaneProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const texture = useLoader(TextureLoader, image.src);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    console.log("isScrolling state changed:", isScrolling);
-  }, [isScrolling]);
+    console.log('isScrolling : ', isScrolling)
+    console.log('scrollSpeed : ', scrollSpeed)
+  })
 
-  const uniforms = useRef({
+  const uniforms = useMemo(() => ({
     uOffsetZ: { value: 0 },
     uPreviousOffsetZ: { value: 0 },
     uTime: { value: 0 },
     uStartTime: { value: 0 },
     uTexture: { value: texture },
     uScrollProgress: { value: 0 },
-  });
+    uScrollSpeed: { value: scrollSpeed }
+  }), [texture]);  
 
-  const clock = new THREE.Clock();
-
-  const handleClickPlane = () => {
-    // if (isAnimating) return;
-
-    uniforms.current.uPreviousOffsetZ.value = uniforms.current.uOffsetZ.value;
-    const targetOffset = uniforms.current.uOffsetZ.value === 0 ? -10 : uniforms.current.uOffsetZ.value * -1;
-    
-    uniforms.current.uOffsetZ.value = targetOffset;
-    uniforms.current.uStartTime.value = clock.getElapsedTime();
-    // setIsAnimating(true);
-
-    // setTimeout(() => setIsAnimating(false), 1000);
-  };
+  useEffect(() => {
+    uniforms.uScrollProgress.value = isScrolling ? 1.0 : 0.0;
+  }, [isScrolling]);
 
   useFrame(() => {
-    uniforms.current.uTime.value = clock.getElapsedTime();
+    uniforms.uTime.value += 0.01;
+    uniforms.uScrollSpeed.value = scrollSpeed;
   });
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      onClick={handleClickPlane}
-    >
-        <planeGeometry args={[width, height, 35, 35]} />
-        <shaderMaterial
-            vertexShader={isScrolling ? planeVertexScrollShader : planeVertexShader}
-            fragmentShader={isScrolling ? planeFragmentScrollShader : planeFragmentShader}
-            uniforms={uniforms.current}
-        />
-
+    <mesh ref={meshRef} position={position}>
+      <planeGeometry args={[width, height, 35, 35]} />
+      <shaderMaterial
+        vertexShader={isScrolling ? planeVertexScrollShader : planeVertexShader}
+        fragmentShader={isScrolling ? planeFragmentScrollShader : planeFragmentShader}
+        uniforms={uniforms}
+      />
     </mesh>
   );
 };

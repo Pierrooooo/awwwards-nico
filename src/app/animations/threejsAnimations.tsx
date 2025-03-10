@@ -8,7 +8,8 @@ export const scrollThreeAnimation = (
   planesConfig: Array<any>,
   setCameraY: React.Dispatch<React.SetStateAction<number>>, 
   setCameraZ?: React.Dispatch<React.SetStateAction<number>>, 
-  setIsScrolling?: React.Dispatch<React.SetStateAction<boolean>>
+  setIsScrolling?: React.Dispatch<React.SetStateAction<boolean>>,
+  setScrollSpeed?: React.Dispatch<React.SetStateAction<number>>
 ) => {
   if (!contentRef.current || planesConfig.length === 0) return;
 
@@ -21,28 +22,37 @@ export const scrollThreeAnimation = (
   ScrollTrigger.create({
     trigger: contentRef.current,
     start: "top top",
-    end: `bottom+=100%`,
+    end: `bottom+=300%`,
     scrub: true,
     pin: true,
     markers: true,
     onUpdate: (self) => {
       const currentScrollY = window.scrollY;
       const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+      console.log('scrollDelta', scrollDelta)
+      
       lastScrollY = currentScrollY;
-
-      const yPosition = -self.progress * totalHeight * 2;
+    
+      const yPosition = -self.progress * totalHeight * 1.5;
       setCameraY(yPosition);
-
+    
       if (setCameraZ) {
         const zPosition = 10 + Math.sin(scrollDelta * 0.05) * (totalHeight * 0.1);
         setCameraZ(zPosition);
       }
-
-      setIsScrolling?.(true);
-
+    
+      if (scrollDelta > 0 && setIsScrolling) {
+        setIsScrolling(true);
+        if (setScrollSpeed) {
+          setScrollSpeed(currentScrollY - lastScrollY);
+        }
+      }
+    
       if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => setIsScrolling?.(false), 200);
-    }
+      scrollTimeout = setTimeout(() => {
+        if (setIsScrolling) setIsScrolling(false);
+      }, 200);
+    }    
   });
 
   return () => {

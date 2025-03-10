@@ -1,13 +1,12 @@
 export const planeFragmentScrollShader = `
-    uniform sampler2D uTexture;
     varying vec2 vUv;
+    uniform sampler2D uTexture;
 
     void main() {
-        vec4 textureColor = texture2D(uTexture, vUv);
+        // Récupération de la couleur de la texture en fonction des UV
+        vec4 color = texture2D(uTexture, vUv);
 
-        float distortion = sin(vUv.y * 10.0) * 10;
-        textureColor.rgb += distortion;
-
-        gl_FragColor = textureColor;
+        // Appliquer directement la couleur sans animation ni effet dynamique
+        gl_FragColor = color;
     }
-`
+`;
